@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+package com.sotamo.netty.protobuf;
+
+option optimize_for = SPEED;
+option java_package = "com.sotami.netty.demoProtobuf";
+option java_outer_classname = "MyDataInfo";
+
+
+
+message MyMessage{
+
+    enum DataType{
+        PersionType = 1;
+        DogType = 2;
+        CatType = 3;
+    }
+
+    required DataType data_type = 1;
+
+    oneof data_body{
+        Persion persion = 2;
+        Dog dog = 3;
+        Cat cat = 4;
+    }
+
+}
+
+
+message Persion {
+    optional string name = 1;
+    optional int32 age = 2;
+    optional string address = 3;
+}
+
+message Dog{
+    optional string name = 1;
+    optional int32 age = 2;
+}
+
+message Cat{
+    optional string name = 1;
+    optional string city = 2;
+}

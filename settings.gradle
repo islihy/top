@@ -1,0 +1,6 @@
+rootProject.name = 'top'
+include 'eureka-server'
+include 'nutz-demo'
+include 'toy'
+include 'netty_demo'
+include 'winxin-bear'

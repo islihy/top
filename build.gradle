@@ -1,0 +1,189 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://oss.sonatype.org/content/groups/public/" }
+        maven { url "https://repo.spring.io/libs-milestone/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        //jcenter()
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+    }
+}
+plugins {
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
+
+subprojects{
+    apply plugin: 'idea'
+}
+
+
+
+//this.beforeEvaluate {} //在配置阶段开始之前 的监听回调
+//this.afterEvaluate {
+//    println("配置阶段执行结束...")
+//}//在配置阶段之后，在执行之前的监听回调
+//
+//this.gradle.buildFinished {
+//    println('执行阶段执行结束...')
+//}//在gradle生命周期执行完之后的监听回调
+//
+//this.gradle.beforeProject {}
+//this.gradle.afterProject {}
+
+//this.getProjects()
+//
+//def getProjects(){
+//    println '''
+//------
+//Root Project
+//------
+//'''
+//
+//    //getSubprojects()输出子project
+//    //this.getParent()得到父project
+//    this.getAllprojects().eachWithIndex{ Project entry, int i ->
+//        if (i==0){
+//            println "Root project：$entry.name"
+//        }else{
+//            println "+---project：$entry.name"
+//        }
+//    }
+//}
+
+///**
+// * project api 讲解
+// */
+//project('app'){ Project project ->
+//    apply plugin: 'java'
+//    group 'org.islihy'
+//    version '1.0-SNAPSHOT'
+//
+//    dependencies{
+//
+//    }
+//}
+
+//配置当期节点project和其Subproject的所有project
+//allprojects({
+//
+//})
+
+//不包括当前节点工程，只包括所有子工程
+//subprojects(){ Project project ->
+//    //当引入'java'的时候   dependencies的是org.gradle.api.artifacts.dsl.DependencyHandler
+//    //默认引入的                          org.gradle.api.internal.artifacts.dsl.dependencies.DefaultDependencyHandler
+//    apply plugin: 'java'
+//    if (project.plugins.hasPlugin('com.android.library')){
+//        apply plugin: '../publicToMaven.gradle'
+//    }
+//    sourceCompatibility = 1.8
+//    targetCompatibility = 1.8
+//    repositories {
+//        mavenCentral()
+//    }
+//
+//    dependencies {
+//        implementation(
+//                'io.netty:netty-all:4.1.33.Final',
+//                'com.google.protobuf:protobuf-java:3.6.0',
+//                'com.google.protobuf:protobuf-java-util:3.6.0')
+//        testCompile group: 'junit', name: 'junit', version: '4.12'
+//    }
+//}
+
+//println this.getRootDir().absolutePath
+//println this.getBuildDir().absolutePath
+//println this.getBuildFile().absolutePath
+
+//println getContext('gradlew')
+//
+//def getContext(String path){
+//    try{
+//        def f = file(path)
+//
+////        files()
+//        return f.text
+//    }catch (GradleException e){
+//        println(e)
+//    }
+//    return null
+//
+//}
+
+//copy {
+//
+//}
+
+//buildscript { ScriptHandler s ->
+//
+//    repositories {
+//        //配置工程的仓库地址
+//        jcenter()
+//        mavenCentral()
+//        mavenLocal()
+//
+////        ivy {}
+//
+//        maven {
+//            name 'youku'
+//            url 'http://localhsot:8081/nexus/repositories'
+//            credentials {
+//                username = 'joe'
+//                password = 'secret'
+//            }
+//        }
+//    }
+//
+//    dependencies {
+//        //配置工程的"插件"依赖地址
+////        classpath 'com.android.tools.build:gradle:2.2.2'
+//    }
+//
+//}
+
+//task 'testCopy' {
+//    doLast {
+//        def sourcePath = '/Users/lihangyu/Desktop/test.jpg'
+//        def desationPath = this.rootDir.path + '/images/'
+//        def comand = "mv -f ${sourcePath} ${desationPath}"
+//
+//        exec{
+//            try {
+//                executable 'bash'
+//                args '-c', comand
+//                println "the command is execute success."
+//            }catch (GradleException e){
+//                println "the command is execute failed."
+//            }
+//        }
+//
+//
+//        exec {
+//            def f = new ProcessBuilder()
+//                    .directory(projectDir)
+//                    .command()
+//                    .start()
+//            print(f)
+//        }
+//
+//    }
+//}
+
+task helloTask (group: 'islihy',description: 'task1'){
+    println "hello task"
+    doFirst {
+        println("the task group is "+ getGroup())
+    }
+}
+
+this.tasks.create( name: 'helloTask2'){
+    setGroup('islihy')
+    setDescription('task2')
+    println "hello task2"
+}

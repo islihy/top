@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
+
+group 'cloud.islihy'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenCentral()
+
+}
+
+dependencies {
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}

@@ -1,0 +1,26 @@
+server:
+  port: 7070
+  servlet:
+    context-path: /wx
+
+winxin:
+  mp:
+    appId: wx00ee142cc1aed80e
+    appsecret: 11e1b2774f77958dad44158c9df82cd1
+    token: sotamiToken1
+
+
+spring:
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    password:
+    port: 6379
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        min-idle: 0
+        max-idle: 8
