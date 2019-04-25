@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
+apply plugin: "com.bmuschko.docker-spring-boot-application"
 
 group 'cloud.islihy'
 version '1.0-SNAPSHOT'
@@ -22,5 +23,14 @@ dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+docker {
+    springBootApplication {
+        baseImage = 'openjdk:8-alpine'
+        ports = [9090, 8080]
+        tag = 'awesome-spring-boot:1.115'
+        jvmArgs = ['-Dspring.profiles.active=production', '-Xmx2048m']
     }
 }

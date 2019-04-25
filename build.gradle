@@ -12,14 +12,16 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
         classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+        classpath 'com.bmuschko:gradle-docker-plugin:4.8.0'
     }
 }
 plugins {
     id "io.spring.dependency-management" version "1.0.7.RELEASE"
 }
 
-subprojects{
+allprojects{
     apply plugin: 'idea'
+    apply plugin: 'com.bmuschko.docker-remote-api'
 }
 
 
@@ -175,15 +177,66 @@ subprojects{
 //    }
 //}
 
-task helloTask (group: 'islihy',description: 'task1'){
-    println "hello task"
-    doFirst {
-        println("the task group is "+ getGroup())
-    }
-}
+//task helloTask (group: 'islihy',description: 'task1'){
+//    println "hello task"
+//    doFirst {
+//        println("the task group is "+ getGroup())
+//    }
+//}
+//
+//this.tasks.create( name: 'helloTask2'){
+//    setGroup('islihy')
+//    setDescription('task2')
+//    println "hello task2"
+//}
 
-this.tasks.create( name: 'helloTask2'){
-    setGroup('islihy')
-    setDescription('task2')
-    println "hello task2"
-}
+//task taskX {
+//    doLast {
+//        println 'taskX'
+//    }
+//}
+//
+//task taskY (dependsOn:taskX) {
+//    doLast {
+//        println 'taskY'
+//    }
+//}
+//
+//task taskZ (dependsOn:[taskX,taskY]){
+//
+//    dependsOn this.tasks.findAll {
+//        task -> return task.name.startsWith('test')
+//    }
+//    doLast {
+//        println 'taskZ'
+//    }
+//}
+//
+//task testDemo {
+//    println "hello task"
+//    doFirst {
+//        println("the task group is "+ getGroup())
+//    }
+//}
+
+
+
+/** gradle 执行顺序的指定
+ *
+ * 1. 添加依赖
+ * 2. 指定输入输出
+ * 3. mustRunAfter
+ * **/
+
+//task testdemo{
+//
+//    mustRunAfter helloTask
+////    shouldRunAfter()
+//    doLast{
+//        println('must run after')
+//    }
+//}
+
+
+
+

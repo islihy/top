@@ -42,20 +42,20 @@ public class MainSetup implements Setup {
             dao.insert(user);
         }
 
-        LOG.info("开始初始化ribbon");
-        try {
-            // 加载ribbon配置文件
-            ConfigurationManager.loadPropertiesFromResources("ribbon.properties");
-        } catch (IOException e) {
-            e.printStackTrace();
-            LOG.error("ribbon初始化失败");
-            throw new IllegalStateException("ribbon初始化失败");
-        }
-        LOG.info("ribbon初始化完成");
-        // 初始化Eureka Client
-        LOG.info("Eureka初始化完成,正在注册Eureka Server");
-        DiscoveryManager.getInstance().initComponent(new MyInstanceConfig(), new DefaultEurekaClientConfig());
-        ApplicationInfoManager.getInstance().setInstanceStatus(InstanceInfo.InstanceStatus.UP);
+//        LOG.info("开始初始化ribbon");
+//        try {
+//            // 加载ribbon配置文件
+//            ConfigurationManager.loadPropertiesFromResources("ribbon.properties");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            LOG.error("ribbon初始化失败");
+//            throw new IllegalStateException("ribbon初始化失败");
+//        }
+//        LOG.info("ribbon初始化完成");
+//        // 初始化Eureka Client
+//        LOG.info("Eureka初始化完成,正在注册Eureka Server");
+//        DiscoveryManager.getInstance().initComponent(new MyInstanceConfig(), new DefaultEurekaClientConfig());
+//        ApplicationInfoManager.getInstance().setInstanceStatus(InstanceInfo.InstanceStatus.UP);
     }
 
     @Override

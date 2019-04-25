@@ -3,7 +3,6 @@ version '1.0-SNAPSHOT'
 
 
 apply plugin: 'java'
-
 sourceCompatibility = 1.8
 
 repositories {
@@ -11,11 +10,10 @@ repositories {
     mavenCentral()
 }
 
-dependencies (){ DependencyHandler handler ->
-
-    handler.compile 'io.netty:netty-all:4.1.33.Final'
-    handler.compile 'mysql:mysql-connector-java:5.1.47'
-    handler.compile 'com.alibaba:druid:1.1.10'
+dependencies (){
+    compile 'io.netty:netty-all:4.1.33.Final'
+    compile 'mysql:mysql-connector-java:5.1.47'
+    compile 'com.alibaba:druid:1.1.10'
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'org.apache.commons:commons-collections4:4.0'
     compile 'commons-codec:commons-codec:1.11'
@@ -25,4 +23,37 @@ dependencies (){ DependencyHandler handler ->
     compile 'org.junit.jupiter:junit-jupiter-params:5.4.0'
     compile 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
     compile 'com.alibaba:fastjson:1.2.55'
+}
+
+
+
+ext {
+    versionName = '1.0.0'
+    versionCode = '100'
+    versionInfo = 'App的第1个版本，上线了一些最基础核心的功能'
+    destFile = file('releases.xml')
+    if (destFile == null && !destFile.exists()){
+        destFile.createNewFile()
+    }
+}
+
+
+task handleReleaseFile {
+    def srcFile = file('releases.xml')
+    def destDir = new File(this.projectDir,'images/')
+    doLast {
+        println '开始解析对应的xml文件'
+        destDir.mkdir()
+        def releases = new XmlParser().parse(srcFile)
+        releases.release.each { releaseNode ->
+            def name = releaseNode.versionName.text()
+            def versionCode = releaseNode.versionCode.text()
+            def versionInfo = releaseNode.versionInfo.text()
+
+            def destFile = new File(destDir,"release-${name}.text")
+            destFile.withWriter { writer ->
+                writer.write("${name} -> ${versionCode} -> ${versionInfo}")
+            }
+        }
+    }
 }

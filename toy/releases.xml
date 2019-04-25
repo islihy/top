@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<releases>
+    <release>
+        <versionCode>100</versionCode>
+        <versionName>1.0.0</versionName>
+        <versionInfo>App的第1个版本，上线了一些最基础核心的功能</versionInfo>
+    </release>
+
+    <release>
+        <versionCode>100</versionCode>
+        <versionName>1.0.1</versionName>
+        <versionInfo>App的第2个版本，修复了第一个版本的BUG</versionInfo>
+    </release>
+
+</releases>
